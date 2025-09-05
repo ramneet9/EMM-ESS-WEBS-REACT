@@ -5,6 +5,191 @@
   text-align: center;
 }
 
+/* Mobile Navigation styles are now in the main CSS file */
+
+/* Services Hover Blur Effect */
+.services-container {
+  transition: all 0.3s ease;
+}
+
+.service-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.services-container:hover .service-card:not(:hover) {
+  filter: blur(3px);
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+.service-card:hover {
+  transform: scale(1.05);
+  z-index: 10;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+/* 3D Section Headings */
+.section-title h2 {
+  text-shadow: 
+    2px 2px 0px #ffc451,
+    4px 4px 0px #e6b03f,
+    6px 6px 0px #cc9e37,
+    8px 8px 0px #b38b2f,
+    10px 10px 20px rgba(0, 0, 0, 0.5);
+  transform: perspective(500px) rotateX(10deg);
+  transition: all 0.3s ease;
+}
+
+.section-title h2:hover {
+  transform: perspective(500px) rotateX(0deg) scale(1.05);
+  text-shadow: 
+    3px 3px 0px #ffc451,
+    6px 6px 0px #e6b03f,
+    9px 9px 0px #cc9e37,
+    12px 12px 0px #b38b2f,
+    15px 15px 30px rgba(0, 0, 0, 0.7);
+}
+
+.section-title p {
+  text-shadow: 
+    1px 1px 0px #ffc451,
+    2px 2px 0px #e6b03f,
+    3px 3px 0px #cc9e37,
+    4px 4px 8px rgba(0, 0, 0, 0.3);
+  transform: perspective(300px) rotateX(5deg);
+  transition: all 0.3s ease;
+}
+
+.section-title p:hover {
+  transform: perspective(300px) rotateX(0deg) scale(1.02);
+  text-shadow: 
+    2px 2px 0px #ffc451,
+    4px 4px 0px #e6b03f,
+    6px 6px 0px #cc9e37,
+    8px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* 3D Logo Effects */
+.logo img {
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+.logo:hover img {
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.6));
+  transform: scale(1.05) perspective(500px) rotateY(5deg);
+}
+
+/* Enhanced Logo Scroll Effect */
+.logo {
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.logo:hover {
+  transform: perspective(500px) rotateY(10deg) scale(1.1);
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.7));
+}
+
+/* 3D Effects for Other Headings */
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: 
+    1px 1px 0px #ffc451,
+    2px 2px 0px #e6b03f,
+    3px 3px 0px #cc9e37,
+    4px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+  transform: perspective(300px) rotateX(5deg) scale(1.02);
+  text-shadow: 
+    2px 2px 0px #ffc451,
+    4px 4px 0px #e6b03f,
+    6px 6px 0px #cc9e37,
+    8px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Hero Section 3D Effects */
+#hero h1 {
+  text-shadow: 
+    3px 3px 0px #ffc451,
+    6px 6px 0px #e6b03f,
+    9px 9px 0px #cc9e37,
+    12px 12px 0px #b38b2f,
+    15px 15px 25px rgba(0, 0, 0, 0.6);
+  transform: perspective(600px) rotateX(15deg);
+  transition: all 0.4s ease;
+}
+
+#hero h1:hover {
+  transform: perspective(600px) rotateX(0deg) scale(1.08);
+  text-shadow: 
+    4px 4px 0px #ffc451,
+    8px 8px 0px #e6b03f,
+    12px 12px 0px #cc9e37,
+    16px 16px 0px #b38b2f,
+    20px 20px 35px rgba(0, 0, 0, 0.8);
+}
+
+#hero h2 {
+  text-shadow: 
+    2px 2px 0px #ffc451,
+    4px 4px 0px #e6b03f,
+    6px 6px 0px #cc9e37,
+    8px 8px 20px rgba(0, 0, 0, 0.4);
+  transform: perspective(400px) rotateX(10deg);
+  transition: all 0.3s ease;
+}
+
+#hero h2:hover {
+  transform: perspective(400px) rotateX(0deg) scale(1.05);
+  text-shadow: 
+    3px 3px 0px #ffc451,
+    6px 6px 0px #e6b03f,
+    9px 9px 0px #cc9e37,
+    12px 12px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Ensure mobile nav is properly positioned */
+@media (max-width: 991px) {
+  .mobile-nav {
+    position: fixed !important;
+    top: 55px !important;
+    right: 15px !important;
+    bottom: 15px !important;
+    left: 15px !important;
+    z-index: 9999 !important;
+    overflow-y: auto !important;
+    background: #fff !important;
+    transition: ease-in-out 0.2s !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    border-radius: 10px !important;
+    padding: 10px 0 !important;
+  }
+  
+  .mobile-nav-active .mobile-nav {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  .mobile-nav-overly {
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 9997 !important;
+    top: 0 !important;
+    left: 0 !important;
+    position: fixed !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    overflow: hidden !important;
+    display: block !important;
+    transition: ease-in-out 0.2s !important;
+  }
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

@@ -17,14 +17,19 @@ function Section({ id, title, children }) {
 
 export default function ProductsPage() {
   const brands = [
-    { name: 'Mimosa', logo: '/assets/img/clients/client-1.png' },
-    { name: 'Engenius', logo: '/assets/img/clients/client-2.png' },
-    { name: 'Netgear', logo: '/assets/img/clients/client-3.png' },
-    { name: 'Ligowave', logo: '/assets/img/clients/client-4.png' },
-    { name: 'Mikrotik', logo: '/assets/img/clients/client-5.png' },
-    { name: 'Hikvision', logo: '/assets/img/clients/client-6.png' },
-    { name: 'Fortinet', logo: '/assets/img/clients/client-7.png' },
-    { name: 'Polycom', logo: '/assets/img/clients/client-8.png' },
+    { name: 'Mimosa Wireless', logo: '/assets/img/clients/mimosa.png' },
+    { name: 'Cambium Networks', logo: '/assets/img/clients/cambium.png' },
+    { name: 'RADWIN Wireless', logo: '/assets/img/clients/images.png' },
+    { name: 'Engenius', logo: '/assets/img/clients/engenius.png' },
+    { name: 'Quantum Wireless', logo: '/assets/img/clients/quantum.png' },
+    { name: 'Aspera Walkie Talkie', logo: '/assets/img/clients/aspera.png' },
+    { name: 'Nexio Walkie Talkie', logo: '/assets/img/clients/nexio.png' },
+    { name: 'Yealink', logo: '/assets/img/clients/yealink.png' },
+    { name: 'People Link', logo: '/assets/img/clients/poeple.png' },
+    { name: 'Star Splicing Machine', logo: '/assets/img/clients/star.png' },
+    { name: 'Lenovo', logo: '/assets/img/clients/client-3.png' },
+    { name: 'Acer', logo: '/assets/img/clients/client-1.png' },
+
   ]
   return (
     <>
@@ -48,26 +53,38 @@ export default function ProductsPage() {
         <div className="row">
           <div className="col-md-4 mb-3">
             <div className="icon-box h-100">
-              <h4>Point to Point</h4>
-              <p className="mb-2">High-throughput PTP links for backbone, last-mile and campus bridging.</p>
+              <h4>Wireless Solutions</h4>
+              <p className="mb-2">Mimosa Wireless, Cambium Networks and RADWIN Wireless for high-performance wireless connectivity.</p>
             </div>
           </div>
           <div className="col-md-4 mb-3">
             <div className="icon-box h-100">
-              <h4>Point to Multi Point</h4>
-              <p className="mb-2">Reliable PTMP for enterprise Wi‑Fi, surveillance backhaul and ISP deployments.</p>
+              <h4>Enterprise Networking</h4>
+              <p className="mb-2">Engenius and Quantum Wireless solutions for business networking needs.</p>
             </div>
           </div>
           <div className="col-md-4 mb-3">
             <div className="icon-box h-100">
-              <h4>Accessories</h4>
-              <p className="mb-2">Antennas, PoE, mount kits and cables compatible with leading brands.</p>
+              <h4>Communication Devices</h4>
+              <p className="mb-2">Aspera and Nexio Walkie Talkies for reliable two-way communication.</p>
             </div>
           </div>
           <div className="col-md-4 mb-3">
             <div className="icon-box h-100">
-              <h4>Enterprise Wi‑Fi</h4>
-              <p className="mb-2">Secure and scalable WLAN solutions for offices, campuses and hospitality.</p>
+              <h4>VoIP Solutions</h4>
+              <p className="mb-2">Yealink products for professional VoIP and video conferencing.</p>
+            </div>
+          </div>
+          <div className="col-md-4 mb-3">
+            <div className="icon-box h-100">
+              <h4>Video Conferencing</h4>
+              <p className="mb-2">People Link solutions for seamless video collaboration.</p>
+            </div>
+          </div>
+          <div className="col-md-4 mb-3">
+            <div className="icon-box h-100">
+              <h4>Fiber Optic Tools</h4>
+              <p className="mb-2">Star Splicing Machine for professional fiber optic cable installations.</p>
             </div>
           </div>
         </div>

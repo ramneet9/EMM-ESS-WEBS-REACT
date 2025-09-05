@@ -6,9 +6,9 @@ export default function Services() {
           <h2>Services</h2>
           <p>Check our Services</p>
         </div>
-        <div className="row">
+        <div className="row services-container">
           <div className="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div className="icon-box">
+            <div className="icon-box service-card">
               <div className="icon"><i className="bx bxl-dribbble"></i></div>
               <h4><a>IT Infrastructure</a></h4>
               <ul>
@@ -21,7 +21,7 @@ export default function Services() {
             </div>
           </div>
           <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-            <div className="icon-box">
+            <div className="icon-box service-card">
               <div className="icon"><i className="bx bx-file"></i></div>
               <h4><a>Wireless Solutions</a></h4>
               <ul>
@@ -33,7 +33,7 @@ export default function Services() {
             </div>
           </div>
           <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-            <div className="icon-box">
+            <div className="icon-box service-card">
               <div className="icon"><i className="bx bx-tachometer"></i></div>
               <h4><a>Surveillance Support</a></h4>
               <ul>
@@ -44,7 +44,7 @@ export default function Services() {
             </div>
           </div>
           <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
-            <div className="icon-box">
+            <div className="icon-box service-card">
               <div className="icon"><i className="bx bx-world"></i></div>
               <h4><a>Business Applications</a></h4>
               <ul>
@@ -55,7 +55,7 @@ export default function Services() {
             </div>
           </div>
           <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
-            <div className="icon-box">
+            <div className="icon-box service-card">
               <div className="icon"><i className="bx bx-slideshow"></i></div>
               <h4><a>Maintenance Support</a></h4>
               <ul>
@@ -66,7 +66,7 @@ export default function Services() {
             </div>
           </div>
           <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-            <div className="icon-box">
+            <div className="icon-box service-card">
               <div className="icon"><i className="bx bx-arch"></i></div>
               <h4><a>Product Vendor Services</a></h4>
               <ul>
