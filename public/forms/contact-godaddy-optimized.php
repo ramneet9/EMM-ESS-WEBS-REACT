@@ -1,11 +1,11 @@
 <?php
-// Contact form for GoDaddy hosting - Enhanced version
+// GoDaddy optimized contact form - No backend required
 $receiving_email_address = 'sales@emmessenterprises.com';
-$from_email = 'info@emmessenterprises.com'; // Use the same email that exists on your hosting
 
-// Enable error reporting for debugging
+// Disable error display for production (but keep logging)
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0); // Don't show errors to users
+ini_set('log_errors', 1); // But log them
 
 if ($_POST) {
     $name = trim($_POST['name'] ?? '');
@@ -37,25 +37,21 @@ if ($_POST) {
     $email_body .= "Sent from: " . $_SERVER['HTTP_HOST'] . "\n";
     $email_body .= "IP Address: " . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown');
     
-    // Enhanced headers for GoDaddy
-    $headers = array();
-    $headers[] = "MIME-Version: 1.0";
-    $headers[] = "Content-Type: text/plain; charset=UTF-8";
-    $headers[] = "From: EMMESS Enterprises <$from_email>";
-    $headers[] = "Reply-To: $name <$email>";
-    $headers[] = "Return-Path: $from_email";
-    $headers[] = "X-Mailer: PHP/" . phpversion();
-    $headers[] = "X-Priority: 3";
-    $headers[] = "X-MSMail-Priority: Normal";
+    // GoDaddy optimized headers
+    $headers = "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $headers .= "From: info@emmessenterprises.com\r\n";
+    $headers .= "Reply-To: $email\r\n";
+    $headers .= "Return-Path: info@emmessenterprises.com\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+    $headers .= "X-Priority: 3\r\n";
     
-    $header_string = implode("\r\n", $headers);
-    
-    // Log the attempt for debugging
-    $log_entry = date('Y-m-d H:i:s') . " - Attempting to send email to: $receiving_email_address\n";
+    // Log the attempt
+    $log_entry = date('Y-m-d H:i:s') . " - Attempting to send email to: $receiving_email_address from: $email\n";
     error_log($log_entry, 3, 'email_debug.log');
     
-    // Try to send email
-    $mail_sent = mail($receiving_email_address, $email_subject, $email_body, $header_string);
+    // Try to send email using GoDaddy's mail() function
+    $mail_sent = @mail($receiving_email_address, $email_subject, $email_body, $headers);
     
     if ($mail_sent) {
         // Log success
@@ -64,8 +60,8 @@ if ($_POST) {
         
         echo json_encode(['status' => 'success', 'message' => 'Your message has been sent successfully!']);
     } else {
-        // Log error
-        $error_log = date('Y-m-d H:i:s') . " - Email failed to send to: $receiving_email_address\n";
+        // Log error with more details
+        $error_log = date('Y-m-d H:i:s') . " - Email failed to send to: $receiving_email_address. Error: " . error_get_last()['message'] . "\n";
         error_log($error_log, 3, 'email_debug.log');
         
         echo json_encode(['status' => 'error', 'message' => 'Sorry, there was an error sending your message. Please try again later.']);

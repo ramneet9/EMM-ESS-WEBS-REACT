@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
 export default function Header() {
-  const isInner = typeof window !== 'undefined' && window.location && window.location.pathname !== '/'
-  const isProducts = typeof window !== 'undefined' && window.location && window.location.pathname === '/products'
+  const isInner = typeof window !== 'undefined' && window.location && window.location.hash !== '' && window.location.hash !== '#/'
+  const isProducts = typeof window !== 'undefined' && window.location && window.location.hash === '#/products'
   const [activeId, setActiveId] = useState('hero')
   const [mobileNavActive, setMobileNavActive] = useState(false)
 
@@ -27,17 +27,29 @@ export default function Header() {
     sections.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
   }, [isProducts])
+  
   const scrollToId = (id) => (e) => {
     e.preventDefault()
     setMobileNavActive(false) // Close mobile nav when clicking a link
     
     if (isProducts) {
-      // If on products page, navigate to home first, then scroll
-      window.location.href = `/#${id}`
+      // If on products page, navigate to home first, then scroll to section
+      // Store the target section and navigate to home
+      sessionStorage.setItem('scrollToSection', id)
+      window.location.href = '#/'
     } else {
       // If on home page, just scroll to section
-      window.location.hash = id
+      const element = document.getElementById(id)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }
+  }
+
+  const navigateToProducts = (e) => {
+    e.preventDefault()
+    setMobileNavActive(false)
+    window.location.href = '#/products'
   }
 
   const toggleMobileNav = () => {
@@ -57,22 +69,23 @@ export default function Header() {
       document.body.classList.remove('mobile-nav-active')
     }
   }, [mobileNavActive])
+  
   return (
     <>
       <header id="header" className={`fixed-top header-scrolled ${isInner ? 'header-inner-pages' : ''}`}>
         <div className="container d-flex align-items-center justify-content-between">
-          <a href="#hero" onClick={scrollToId('hero')} className="logo"><img src="/assets/img/emmessname.png" alt="EMM ESS Enterprises" className="img-fluid" /></a>
+          <a href="#" onClick={scrollToId('hero')} className="logo"><img src="/assets/img/emmessname.png" alt="EMM ESS Enterprises" className="img-fluid" /></a>
           <nav className="nav-menu d-none d-lg-block">
             <ul>
-              <li className={!isProducts && activeId === 'hero' ? 'active' : ''}><a href={isProducts ? '/#hero' : '#hero'}>Home</a></li>
-              <li className={!isProducts && activeId === 'About' ? 'active' : ''}><a href={isProducts ? '/#About' : '#About'}>About</a></li>
-              <li className={!isProducts && activeId === 'Services' ? 'active' : ''}><a href={isProducts ? '/#Services' : '#Services'}>Services</a></li>
-              <li className={isProducts ? 'active' : ''}><a href="/products">Products</a></li>
-              <li className={!isProducts && activeId === 'contact' ? 'active' : ''}><a href={isProducts ? '/#contact' : '#contact'}>Contact</a></li>
+              <li className={!isProducts && activeId === 'hero' ? 'active' : ''}><a href="#" onClick={scrollToId('hero')}>Home</a></li>
+              <li className={!isProducts && activeId === 'About' ? 'active' : ''}><a href="#" onClick={scrollToId('About')}>About</a></li>
+              <li className={!isProducts && activeId === 'Services' ? 'active' : ''}><a href="#" onClick={scrollToId('Services')}>Services</a></li>
+              <li className={isProducts ? 'active' : ''}><a href="#" onClick={navigateToProducts}>Products</a></li>
+              <li className={!isProducts && activeId === 'contact' ? 'active' : ''}><a href="#" onClick={scrollToId('contact')}>Contact</a></li>
             </ul>
           </nav>
           {!isProducts && (
-            <a href="#About" onClick={scrollToId('About')} className="get-started-btn scrollto d-none d-lg-block">Get Started</a>
+            <a href="#" onClick={scrollToId('About')} className="get-started-btn scrollto d-none d-lg-block">Get Started</a>
           )}
           <i className={`mobile-nav-toggle ${mobileNavActive ? 'icofont-close' : 'icofont-navigation-menu'}`} onClick={toggleMobileNav}></i>
         </div>
@@ -82,25 +95,19 @@ export default function Header() {
       <div className={`mobile-nav ${mobileNavActive ? 'mobile-nav-active' : ''}`}>
         <ul>
           <li className={!isProducts && activeId === 'hero' ? 'active' : ''}>
-            <a href={isProducts ? '/#hero' : '#hero'} onClick={scrollToId('hero')}>Home</a>
+            <a href="#" onClick={scrollToId('hero')}>Home</a>
           </li>
           <li className={!isProducts && activeId === 'About' ? 'active' : ''}>
-            <a href={isProducts ? '/#About' : '#About'} onClick={scrollToId('About')}>About</a>
+            <a href="#" onClick={scrollToId('About')}>About</a>
           </li>
           <li className={!isProducts && activeId === 'Services' ? 'active' : ''}>
-            <a href={isProducts ? '/#Services' : '#Services'} onClick={scrollToId('Services')}>Services</a>
+            <a href="#" onClick={scrollToId('Services')}>Services</a>
           </li>
           <li className={isProducts ? 'active' : ''}>
-            <a href="/products" onClick={(e) => {
-              e.preventDefault()
-              setMobileNavActive(false)
-              if (!isProducts) {
-                window.location.href = '/products'
-              }
-            }}>Products</a>
+            <a href="#" onClick={navigateToProducts}>Products</a>
           </li>
           <li className={!isProducts && activeId === 'contact' ? 'active' : ''}>
-            <a href={isProducts ? '/#contact' : '#contact'} onClick={scrollToId('contact')}>Contact</a>
+            <a href="#" onClick={scrollToId('contact')}>Contact</a>
           </li>
         </ul>
       </div>
@@ -112,5 +119,3 @@ export default function Header() {
     </>
   )
 }
-
-

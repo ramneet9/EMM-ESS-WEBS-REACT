@@ -12,37 +12,73 @@ export default function Hero() {
           <div className="col-xl-2 col-md-4 col-6">
             <div className="icon-box">
               <i className="ri-store-line"></i>
-              <h3><a href="#Services">IT Infrastructure</a></h3>
+              <h3><a href="#" onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById('Services')
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }}>IT Infrastructure</a></h3>
             </div>
           </div>
           <div className="col-xl-2 col-md-4 col-6 ">
             <div className="icon-box">
               <i className="ri-bar-chart-box-line"></i>
-              <h3><a href="#Services">Wireless Solutions</a></h3>
+              <h3><a href="#" onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById('Services')
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }}>Wireless Solutions</a></h3>
             </div>
           </div>
           <div className="col-xl-2 col-md-4 col-6 mt-4 mt-md-0">
             <div className="icon-box">
               <i className="ri-calendar-todo-line"></i>
-              <h3><a href="#Services">Surveillance Support</a></h3>
+              <h3><a href="#" onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById('Services')
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }}>Surveillance Support</a></h3>
             </div>
           </div>
           <div className="col-xl-2 col-md-4 col-6 mt-4 mt-xl-0">
             <div className="icon-box">
               <i className="ri-paint-brush-line"></i>
-              <h3><a href="#Services">Business Applications</a></h3>
+              <h3><a href="#" onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById('Services')
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }}>Business Applications</a></h3>
             </div>
           </div>
           <div className="col-xl-2 col-md-4 col-6 mt-4 mt-xl-0">
             <div className="icon-box">
               <i className="ri-database-2-line"></i>
-              <h3><a href="#Services">Maintenance Support</a></h3>
+              <h3><a href="#" onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById('Services')
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }}>Maintenance Support</a></h3>
             </div>
           </div>
           <div className="col-xl-2 col-md-4 col-6 mt-4 mt-xl-0">
             <div className="icon-box">
               <i className="ri-database-2-line"></i>
-              <h3><a href="#Services">Product Vendor Services</a></h3>
+              <h3><a href="#" onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById('Services')
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }}>Product Vendor Services</a></h3>
             </div>
           </div>
         </div>

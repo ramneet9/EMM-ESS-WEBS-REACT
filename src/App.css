@@ -225,3 +225,36 @@ h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
 .read-the-docs {
   color: #888;
 }
+
+/* Designer Link Styling */
+.designer-link {
+  color: #ffc451 !important;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.designer-link:hover {
+  color: #fff !important;
+  text-shadow: 
+    0 0 10px #ffc451,
+    0 0 20px #ffc451,
+    0 0 30px #ffc451;
+  transform: scale(1.05);
+}
+
+.designer-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(90deg, #ffc451, #fff);
+  transition: width 0.3s ease;
+}
+
+.designer-link:hover::after {
+  width: 100%;
+}

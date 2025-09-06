@@ -11,15 +11,46 @@ import Footer from './components/Footer'
 
 function App() {
   useEffect(() => {
-    // Ensure hash navigation from other pages scrolls to the correct section after mount
-    if (window && window.location && window.location.hash) {
-      const id = window.location.hash.slice(1)
-      const el = document.getElementById(id)
-      if (el && typeof el.scrollIntoView === 'function') {
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: 'auto', block: 'start' })
-        }, 0)
+    // Handle navigation from products page to specific sections
+    const scrollToStoredSection = () => {
+      const targetSection = sessionStorage.getItem('scrollToSection')
+      if (targetSection) {
+        sessionStorage.removeItem('scrollToSection') // Clear it after use
+        const element = document.getElementById(targetSection)
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }, 500) // Delay to ensure page is fully loaded
+        }
       }
+    }
+    
+    // Handle hash navigation from other pages (like products page)
+    const handleHashScroll = () => {
+      if (window && window.location && window.location.hash) {
+        // Check if it's a section hash (not a route hash like #/products)
+        const hash = window.location.hash
+        if (hash && !hash.startsWith('#/') && hash !== '#') {
+          const id = hash.slice(1)
+          const el = document.getElementById(id)
+          if (el && typeof el.scrollIntoView === 'function') {
+            setTimeout(() => {
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }, 300) // Increased delay to ensure page is loaded
+          }
+        }
+      }
+    }
+    
+    // Handle initial load
+    handleHashScroll()
+    scrollToStoredSection()
+    
+    // Handle hash changes
+    window.addEventListener('hashchange', handleHashScroll)
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashScroll)
     }
   }, [])
   return (

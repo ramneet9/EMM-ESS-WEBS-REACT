@@ -6,7 +6,7 @@ export default function Footer() {
           &copy; Copyright <strong><span>EMM ESS ENTERPRISES</span></strong>. All Rights Reserved
         </div>
         <div className="credits">
-          <a href="mailto:sales@emmessenterprises.com" className="cta-btn">sales@emmessenterprises.com</a>
+          Designed by <a href="https://instagram.com/ramneetzz" target="_blank" rel="noopener noreferrer" className="designer-link">Ramneet Singh</a>
         </div>
       </div>
     </footer>

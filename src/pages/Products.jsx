@@ -632,7 +632,12 @@ export default function ProductsPage() {
       <section className="cta">
         <div className="container text-center" data-aos="zoom-in">
           <h3>Ready To Work With Us?</h3>
-          <a className="cta-btn" href="/#contact">Email Sales</a>
+          <a className="cta-btn" href="#" onClick={(e) => {
+            e.preventDefault()
+            // Store the target section and navigate to home
+            sessionStorage.setItem('scrollToSection', 'contact')
+            window.location.href = '#/'
+          }}>Email Sales</a>
         </div>
       </section>
       <Footer />
