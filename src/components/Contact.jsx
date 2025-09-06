@@ -108,7 +108,7 @@ export default function Contact() {
               <div className="phone">
                 <i className="icofont-phone"></i>
                 <h4>Call:</h4>
-                <p>+91 011 40244349</p>
+                <p>+91 011 49075849</p>
                 <p>+91 9643331332</p>
               </div>
             </div>
