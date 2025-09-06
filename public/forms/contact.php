@@ -1,41 +1,47 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
+// Contact form for GoDaddy hosting with SMTP relay
+$receiving_email_address = 'info@emmessenterprises.in';
+$from_email = 'noreply@emmessenterprises.in'; // Use your domain email
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
-
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
-
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
-
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
-
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
-
-  echo $contact->send();
+if ($_POST) {
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $subject = $_POST['subject'] ?? '';
+    $message = $_POST['message'] ?? '';
+    
+    // Basic validation
+    if (empty($name) || empty($email) || empty($message)) {
+        echo json_encode(['status' => 'error', 'message' => 'Please fill in all required fields.']);
+        exit;
+    }
+    
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(['status' => 'error', 'message' => 'Please enter a valid email address.']);
+        exit;
+    }
+    
+    // Prepare email
+    $email_subject = $subject ? "[Contact] $subject" : "[Contact] New message from $name";
+    $email_body = "Name: $name\n";
+    $email_body .= "Email: $email\n";
+    $email_body .= "Subject: $subject\n\n";
+    $email_body .= "Message:\n$message";
+    
+    // GoDaddy SMTP relay headers
+    $headers = "From: $from_email\r\n";
+    $headers .= "Reply-To: $email\r\n";
+    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+    
+    // Try PHP mail() function first (recommended by GoDaddy)
+    if (mail($receiving_email_address, $email_subject, $email_body, $headers)) {
+        echo json_encode(['status' => 'success', 'message' => 'Your message has been sent successfully!']);
+    } else {
+        // Fallback: Try SMTP relay if mail() fails
+        echo json_encode(['status' => 'error', 'message' => 'Sorry, there was an error sending your message. Please try again later.']);
+    }
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+}
 ?>

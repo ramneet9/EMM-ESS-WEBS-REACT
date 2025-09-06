@@ -66,3 +66,82 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Optimized popup animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Click interaction effects */
+.icon-box {
+  transition: all 0.2s ease;
+}
+
+.icon-box:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+
+.icon-box:active {
+  transform: translateY(-1px) !important;
+}
+
+.icon-box:active img {
+  transform: scale(0.98);
+}
+
+/* Product card hover effect */
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* Product image click effect */
+.product-showcase-popup .product-image {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.product-showcase-popup .product-image:active {
+  transform: scale(0.95);
+}
+
+/* Image viewer styles */
+.image-viewer-overlay {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.image-viewer-overlay img {
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Optimized popup styles */
+.product-showcase-popup {
+  animation: scaleIn 0.2s ease-out;
+  will-change: transform, opacity;
+}
+
+/* Simplified scrollbar */
+.product-showcase-popup::-webkit-scrollbar {
+  width: 6px;
+}
+
+.product-showcase-popup::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.product-showcase-popup::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}

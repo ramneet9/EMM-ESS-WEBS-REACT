@@ -19,23 +19,55 @@ export default function Contact() {
         company: formData.get('company') || '', // honeypot, must be empty
         tookMs: Date.now() - startedAt
       }
-      fetch('/api/contact', {
+      
+      // Use FormData for PHP form
+      const phpFormData = new FormData()
+      phpFormData.append('name', payload.name)
+      phpFormData.append('email', payload.email)
+      phpFormData.append('subject', payload.subject)
+      phpFormData.append('message', payload.message)
+      
+      // Use different endpoints for development vs production
+      const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      const endpoint = isDevelopment ? '/api/contact' : '/forms/contact.php'
+      const requestBody = isDevelopment ? JSON.stringify(payload) : phpFormData
+      const headers = isDevelopment ? { 'Content-Type': 'application/json' } : {}
+      
+      fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        headers,
+        body: requestBody
       }).then(async (r) => {
         const data = await r.json()
         const loading = form.querySelector('.loading')
         const error = form.querySelector('.error-message')
         const sent = form.querySelector('.sent-message')
         loading.style.display = 'none'
-        if (!data.ok) {
-          error.textContent = data.error || 'Submission failed'
-          error.style.display = 'block'
+        
+        // Handle both Node.js API response (development) and PHP response (production)
+        if (isDevelopment) {
+          // Node.js API response format
+          if (!data.ok) {
+            error.textContent = data.error || 'Submission failed'
+            error.style.display = 'block'
+          } else {
+            error.style.display = 'none'
+            sent.style.display = 'block'
+            form.reset()
+          }
         } else {
-          error.style.display = 'none'
-          sent.style.display = 'block'
-          form.reset()
+          // PHP response format
+          if (data.status === 'error') {
+            error.textContent = data.message || 'Submission failed'
+            error.style.display = 'block'
+          } else if (data.status === 'success') {
+            error.style.display = 'none'
+            sent.style.display = 'block'
+            form.reset()
+          } else {
+            error.textContent = 'Unknown error occurred'
+            error.style.display = 'block'
+          }
         }
       }).catch(() => {
         const error = form.querySelector('.error-message')
